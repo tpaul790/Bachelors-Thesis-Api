@@ -1,0 +1,15 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no" ?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd"
+>
+    <!--tables-->
+<!--    <include file="/db/changelogs/202507301116-user-changelog.xml"/>-->
+<!--    <include file="db/changelogs/20250730-sessions-changelog.xml"/>-->
+<!--    <include file="db/changelogs/202507301114-member-changelog.xml"/>-->
+<!--    <include file="db/changelogs/202507301125-story-changelog.xml"/>-->
+<!--    <include file="db/changelogs/202508251031-session-manipulation.xml"/>-->
+
+</databaseChangeLog>

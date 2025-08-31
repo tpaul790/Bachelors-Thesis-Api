@@ -1,0 +1,15 @@
+services:
+  postgres:
+    container_name: postgres_synergy
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: Synergy
+    volumes:
+      - db:/data/postgres
+    ports:
+      - "5432:5432"
+    restart: always
+volumes:
+  db:
