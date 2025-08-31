@@ -7,14 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-public class SynergyApplication implements CommandLineRunner {
+public class SynergyApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SynergyApplication.class, args);
-	}
-
-	@Override
-	public void run(String... args) throws Exception {
-		System.out.println("Liquibase migrations executed, app is running...");
-	}
+	public static void main(String[] args) { SpringApplication.run(SynergyApplication.class, args); }
 }
