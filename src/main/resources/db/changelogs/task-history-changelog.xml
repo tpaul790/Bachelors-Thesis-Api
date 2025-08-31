@@ -1,0 +1,49 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no" ?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet id="20250831-1" author="Titieni Paul">
+        <createTable tableName="task_history">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="bigint"/>
+            <column name="task_id" type="bigint"/>
+            <column name="action" type="varchar(256)"/>
+            <column name="old_value" type="varchar(256)"/>
+            <column name="new_value" type="varchar(256)"/>
+            <column name="created_at" type="timestamp"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20250831-2" author="Titieni Paul">
+        <addForeignKeyConstraint  baseColumnNames="user_id"
+                                  baseTableName="task_history"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_users_task_history"
+                                  deferrable="true"
+                                  initiallyDeferred="true"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="id"
+                                  referencedTableName="users"
+                                  referencedTableSchemaName="public"
+                                  validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="task_id"
+                                  baseTableName="task_history"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_tasks_task_history"
+                                  deferrable="true"
+                                  initiallyDeferred="true"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="id"
+                                  referencedTableName="tasks"
+                                  referencedTableSchemaName="public"
+                                  validate="true"/>
+    </changeSet>
+</databaseChangeLog>

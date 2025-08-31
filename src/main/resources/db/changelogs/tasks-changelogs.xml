@@ -1,0 +1,51 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no" ?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet id="20250831-1" author="Titieni Paul">
+        <createTable tableName="tasks">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="assignee_id" type="bigint"/>
+            <column name="reporter_id" type="bigint"/>
+            <column name="title" type="varchar(256)"/>
+            <column name="descripiton" type="varchar(256)"/>
+            <column name="status" type="varchar(256)"/>
+            <column name="priority" type="varchar(256)"/>
+            <column name="created_at" type="timestamp"/>
+            <column name="upated_at" type="timestamp"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20250831-2" author="Titieni Paul">
+        <addForeignKeyConstraint  baseColumnNames="assignee_id"
+                                  baseTableName="tasks"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_assignee_users_tasks"
+                                  deferrable="true"
+                                  initiallyDeferred="true"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="id"
+                                  referencedTableName="users"
+                                  referencedTableSchemaName="public"
+                                  validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="reporter_id"
+                                  baseTableName="tasks"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_reporter_users_tasks"
+                                  deferrable="true"
+                                  initiallyDeferred="true"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="id"
+                                  referencedTableName="users"
+                                  referencedTableSchemaName="public"
+                                  validate="true"/>
+    </changeSet>
+</databaseChangeLog>
