@@ -1,6 +1,10 @@
 package com.ubb.synergy.user;
 
+import com.ubb.synergy.security.annotations.AllowAdmin;
+import com.ubb.synergy.security.annotations.AllowUser;
+import com.ubb.synergy.user.dto.AdminUpdateDto;
 import com.ubb.synergy.user.dto.UserDto;
+import com.ubb.synergy.user.dto.UserUpdateDto;
 import com.ubb.synergy.user.exception.InvalidUserException;
 import com.ubb.synergy.user.exception.UserAlreadyExistException;
 import com.ubb.synergy.user.exception.UserNotFoundException;
@@ -23,6 +27,7 @@ public class UserController {
     }
 
     @GetMapping
+    @AllowAdmin
     public ResponseEntity<List<UserDto>> findAllUsers(){
         return ResponseEntity.ok(userService.findAllUsers());
     }
@@ -40,6 +45,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
+    @AllowAdmin
     public ResponseEntity<?> deleteUser(@PathVariable Long id){
         try {
             userService.deleteUser(id);
@@ -51,8 +57,21 @@ public class UserController {
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody UserDto user){
+    @PutMapping("/user-{id}")
+    @AllowUser
+    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody UserUpdateDto user){
+        try {
+            return ResponseEntity.ok(userService.updateUser(id, user));
+        }catch (UserNotFoundException | InvalidUserException e){
+            return ResponseEntity
+                    .badRequest()
+                    .body(Map.of("error", e.getMessage()));
+        }
+    }
+
+    @PutMapping("/admin-{id}")
+    @AllowAdmin
+    public ResponseEntity<?> updateAdmin(@PathVariable Long id, @RequestBody AdminUpdateDto user){
         try {
             return ResponseEntity.ok(userService.updateUser(id, user));
         }catch (UserNotFoundException | InvalidUserException e){

@@ -13,9 +13,24 @@ public class UserValidator {
                 .append(validateEmail(user))
                 .append(validatePassword(user))
                 .append(validateUsername(user))
+                .append(validateUserRole(user))
                 .append(validateIconNumber(user));
         if(!errors.isEmpty()){
             return errors.toString();
+        }
+        return "";
+    }
+
+    /**
+     * Validate the role of the given user
+     * - ensuers that the role is not null and is one of admin or user
+     * @param user
+     * @return the error message if the role is not valid or an empty string otherwise
+     */
+    private String validateUserRole(UserEntity user) {
+        if(user.getUserRole() == null ||
+                (user.getUserRole() != UserRole.USER && user.getUserRole() != UserRole.ADMIN)){
+            return "Invalid user role";
         }
         return "";
     }
