@@ -15,9 +15,7 @@
             <column name="username" type="varchar(256)">
                 <constraints unique="true"/>
             </column>
-            <column name="email" type="varchar(50)">
-                <constraints unique="true"/>
-            </column>
+            <column name="email" type="varchar(50)"/>
             <column name="password" type="varchar(256)"/>
             <column name="user_role" type="varchar(256)"/>
             <column name="last_active" type="timestamp"/>
