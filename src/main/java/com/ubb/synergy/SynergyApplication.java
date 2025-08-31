@@ -1,13 +1,20 @@
 package com.ubb.synergy;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-public class SynergyApplication {
+@EnableScheduling
+public class SynergyApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SynergyApplication.class, args);
 	}
 
+	@Override
+	public void run(String... args) throws Exception {
+		System.out.println("Liquibase migrations executed, app is running...");
+	}
 }

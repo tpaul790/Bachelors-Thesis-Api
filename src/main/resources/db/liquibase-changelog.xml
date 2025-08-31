@@ -6,10 +6,10 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd"
 >
     <!--tables-->
-<!--    <include file="/db/changelogs/202507301116-user-changelog.xml"/>-->
-<!--    <include file="db/changelogs/20250730-sessions-changelog.xml"/>-->
-<!--    <include file="db/changelogs/202507301114-member-changelog.xml"/>-->
-<!--    <include file="db/changelogs/202507301125-story-changelog.xml"/>-->
-<!--    <include file="db/changelogs/202508251031-session-manipulation.xml"/>-->
-
+    <include file="/db/changelogs/users-changelog.xml"/>
+    <include file="/db/changelogs/teams-changelog.xml"/>
+    <include file="/db/changelogs/members-changelog.xml"/>
+    <include file="/db/changelogs/project-changelog.xml"/>
+    <include file="/db/changelogs/tasks-changelogs.xml"/>
+    <include file="/db/changelogs/task-history-changelog.xml"/>
 </databaseChangeLog>

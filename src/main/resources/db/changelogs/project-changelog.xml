@@ -1,0 +1,34 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no" ?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet id="20250831-1" author="Titieni Paul">
+        <createTable tableName="projects">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="team_id" type="bigint"/>
+            <column name="name" type="varchar(256)"/>
+            <column name="description" type="varchar(256)"/>
+            <column name="created_at" type="timestamp"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20250831-2" author="Titieni Paul">
+        <addForeignKeyConstraint  baseColumnNames="team_id"
+                                  baseTableName="projects"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_teams_projects"
+                                  deferrable="true"
+                                  initiallyDeferred="true"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="id"
+                                  referencedTableName="teams"
+                                  referencedTableSchemaName="public"
+                                  validate="true"/>
+    </changeSet>
+</databaseChangeLog>
