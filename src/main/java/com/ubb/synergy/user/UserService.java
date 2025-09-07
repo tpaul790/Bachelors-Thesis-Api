@@ -23,6 +23,11 @@ public class UserService {
     private final UserMapper mapper;
     private final PasswordEncoder encoder;
 
+    public UserDto findUserById(Long id) {
+        UserEntity user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+        return mapper.entityToDto(user);
+    }
+
     public List<UserDto> findAllUsers() {
         return mapper.entityToDto(userRepository.findAll());
     }

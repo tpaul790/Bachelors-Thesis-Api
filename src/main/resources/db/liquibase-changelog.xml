@@ -10,6 +10,7 @@
     <include file="/db/changelogs/teams-changelog.xml"/>
     <include file="/db/changelogs/members-changelog.xml"/>
     <include file="/db/changelogs/project-changelog.xml"/>
+    <include file="/db/changelogs/sprints-changelog.xml"/>
     <include file="/db/changelogs/tasks-changelogs.xml"/>
     <include file="/db/changelogs/task-history-changelog.xml"/>
 </databaseChangeLog>

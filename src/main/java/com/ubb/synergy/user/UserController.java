@@ -26,6 +26,17 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findUserById(@PathVariable Long id) {
+        try{
+            return ResponseEntity.ok(userService.findUserById(id));
+        }catch (UserNotFoundException e){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("error", e.getMessage()));
+        }
+    }
+
     @GetMapping
     @AllowAdmin
     public ResponseEntity<List<UserDto>> findAllUsers(){
@@ -58,7 +69,6 @@ public class UserController {
     }
 
     @PutMapping("/user-{id}")
-    @AllowUser
     public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody UserUpdateDto user){
         try {
             return ResponseEntity.ok(userService.updateUser(id, user));
