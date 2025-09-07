@@ -1,5 +1,7 @@
 package com.ubb.synergy.user;
 
+import com.ubb.synergy.project.ProjectService;
+import com.ubb.synergy.project.projection.ProjectSummaryProjection;
 import com.ubb.synergy.security.annotations.AllowAdmin;
 import com.ubb.synergy.security.annotations.AllowUser;
 import com.ubb.synergy.user.dto.AdminUpdateDto;
@@ -9,6 +11,7 @@ import com.ubb.synergy.user.exception.InvalidUserException;
 import com.ubb.synergy.user.exception.UserAlreadyExistException;
 import com.ubb.synergy.user.exception.UserNotFoundException;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,13 +21,11 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/api/users")
 public class UserController {
     private final UserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    private final ProjectService projectService;
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findUserById(@PathVariable Long id) {
@@ -89,6 +90,11 @@ public class UserController {
                     .badRequest()
                     .body(Map.of("error", e.getMessage()));
         }
+    }
+
+    @GetMapping("/{id}/projects")
+    public ResponseEntity<List<ProjectSummaryProjection>> findAllProjectsByUserId(@PathVariable Long id){
+        return ResponseEntity.ok(projectService.findAllProjectsByUserId(id));
     }
 
 }

@@ -1,5 +1,6 @@
 package com.ubb.synergy.user;
 
+import com.ubb.synergy.project.projection.ProjectSummaryProjection;
 import com.ubb.synergy.security.controller.LoginRequest;
 import com.ubb.synergy.user.dto.AdminUpdateDto;
 import com.ubb.synergy.user.dto.UpdatableUserDto;
@@ -10,6 +11,7 @@ import com.ubb.synergy.user.exception.LoginFaildException;
 import com.ubb.synergy.user.exception.UserAlreadyExistException;
 import com.ubb.synergy.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
