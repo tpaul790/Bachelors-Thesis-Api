@@ -57,7 +57,7 @@ public class AuthentificationController {
             return ResponseEntity.ok(userService.saveUser(user));
         }catch (InvalidUserException | UserAlreadyExistException e){
             return ResponseEntity
-                    .badRequest()
+                    .status(HttpStatus.UNAUTHORIZED)
                     .body(Map.of("error", e.getMessage()));
         }
     }

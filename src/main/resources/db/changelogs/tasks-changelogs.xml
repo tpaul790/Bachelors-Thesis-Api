@@ -12,6 +12,7 @@
             </column>
             <column name="assignee_id" type="bigint"/>
             <column name="reporter_id" type="bigint"/>
+            <column name="sprint_id" type="bigint"/>
             <column name="title" type="varchar(256)"/>
             <column name="descripiton" type="varchar(256)"/>
             <column name="status" type="varchar(256)"/>
@@ -45,6 +46,19 @@
                                   onUpdate="RESTRICT"
                                   referencedColumnNames="id"
                                   referencedTableName="users"
+                                  referencedTableSchemaName="public"
+                                  validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="sprint_id"
+                                  baseTableName="tasks"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_sprints_tasks"
+                                  deferrable="true"
+                                  initiallyDeferred="true"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="id"
+                                  referencedTableName="sprints"
                                   referencedTableSchemaName="public"
                                   validate="true"/>
     </changeSet>
