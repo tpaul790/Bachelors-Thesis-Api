@@ -3,7 +3,9 @@ package com.ubb.synergy.project;
 import com.ubb.synergy.project.dto.CreateProjectDto;
 import com.ubb.synergy.project.dto.ProjectDto;
 import com.ubb.synergy.project.exception.ProjectAlreadyExistException;
+import com.ubb.synergy.project.exception.ProjectNotFoundException;
 import com.ubb.synergy.project.projection.ProjectSummaryProjection;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -32,6 +34,18 @@ public class ProjectController {
             return ResponseEntity
                     .badRequest()
                     .body(Map.of("error",e.getMessage()));
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteProject(@PathVariable Long id) {
+        try{
+            projectService.deleteProject(id);
+            return ResponseEntity.ok().build();
+        }catch (ProjectNotFoundException e){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("error", e.getMessage()));
         }
     }
 }
