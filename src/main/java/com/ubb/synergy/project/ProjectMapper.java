@@ -18,9 +18,9 @@ public interface ProjectMapper {
     ProjectEntity dtoToEntity(ProjectDto dto);
 
     //CreateProjectDto
-    CreateProjectDto entitytoCreateProjectDto(ProjectEntity entity);
+    CreateProjectDto entitytoCreateDto(ProjectEntity entity);
 
-    List<CreateProjectDto> entitytoCreateProjectDto(List<ProjectEntity> entities);
+    List<CreateProjectDto> entitytoCreateDto(List<ProjectEntity> entities);
 
-    ProjectEntity createProjectDtoToEntity(CreateProjectDto dto);
+    ProjectEntity createDtoToEntity(CreateProjectDto dto);
 }
