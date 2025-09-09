@@ -15,6 +15,7 @@ public class MemberEntity {
     private Long id;
 
     @Column(name = "role")
+    @Enumerated(EnumType.STRING)
     private MemberRole role;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -2,11 +2,13 @@ package com.ubb.synergy.member;
 
 import com.ubb.synergy.member.dto.CreateMemberDto;
 import com.ubb.synergy.member.exception.MemberAlreadyExistException;
+import com.ubb.synergy.member.exception.MemberNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 
 @Controller
@@ -23,7 +25,19 @@ public class MemberController {
         }catch(MemberAlreadyExistException e){
             return ResponseEntity
                     .badRequest()
-                    .body(e.getMessage());
+                    .body(Map.of("error",e.getMessage()));
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteMember(@PathVariable Long id){
+        try{
+            memberService.deleteMember(id);
+            return ResponseEntity.ok().build();
+        }catch (MemberNotFoundException e){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("error", e.getMessage()));
         }
     }
 }
