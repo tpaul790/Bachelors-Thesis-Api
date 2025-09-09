@@ -3,6 +3,7 @@ package com.ubb.synergy.member;
 import com.ubb.synergy.member.dto.CreateMemberDto;
 import com.ubb.synergy.member.dto.MemberDto;
 import com.ubb.synergy.member.exception.MemberAlreadyExistException;
+import com.ubb.synergy.member.exception.MemberNotFoundException;
 import com.ubb.synergy.team.TeamEntity;
 import com.ubb.synergy.user.UserEntity;
 import jakarta.persistence.EntityManager;
@@ -31,4 +32,10 @@ public class MemberService {
         return mapper.entityToDto(memberRepository.save(member));
     }
 
+    public void deleteMember(Long id) {
+        if(!memberRepository.existsById(id)){
+            throw new MemberNotFoundException();
+        }
+        memberRepository.deleteById(id);
+    }
 }

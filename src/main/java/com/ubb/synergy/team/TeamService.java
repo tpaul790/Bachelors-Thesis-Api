@@ -4,10 +4,13 @@ import com.ubb.synergy.team.dto.CreateTeamDto;
 import com.ubb.synergy.team.dto.TeamDto;
 import com.ubb.synergy.team.exception.TeamAlreadyExistException;
 import com.ubb.synergy.team.exception.TeamNotFoundException;
+import com.ubb.synergy.team.projection.TeamProjection;
+import com.ubb.synergy.team.projection.TeamSummaryProjection;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -30,5 +33,13 @@ public class TeamService {
             throw new TeamNotFoundException();
         }
         teamRepository.deleteById(id);
+    }
+
+    public List<TeamProjection> findAllTeamsByUserId(Long id) {
+        return teamRepository.findAllTeamsByUserId(id);
+    }
+
+    public List<TeamSummaryProjection> findAllTeamsSummaryByUserId(Long id) {
+        return teamRepository.findAllTeamsSummaryByUserId(id);
     }
 }

@@ -3,14 +3,15 @@ package com.ubb.synergy.user;
 import com.ubb.synergy.project.ProjectService;
 import com.ubb.synergy.project.projection.ProjectSummaryProjection;
 import com.ubb.synergy.security.annotations.AllowAdmin;
-import com.ubb.synergy.security.annotations.AllowUser;
+import com.ubb.synergy.team.TeamService;
+import com.ubb.synergy.team.projection.TeamProjection;
+import com.ubb.synergy.team.projection.TeamSummaryProjection;
 import com.ubb.synergy.user.dto.AdminUpdateDto;
 import com.ubb.synergy.user.dto.UserDto;
 import com.ubb.synergy.user.dto.UserUpdateDto;
 import com.ubb.synergy.user.exception.InvalidUserException;
 import com.ubb.synergy.user.exception.UserAlreadyExistException;
 import com.ubb.synergy.user.exception.UserNotFoundException;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,7 @@ import java.util.Map;
 public class UserController {
     private final UserService userService;
     private final ProjectService projectService;
+    private final TeamService teamService;
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findUserById(@PathVariable Long id) {
@@ -95,6 +97,16 @@ public class UserController {
     @GetMapping("/{id}/projects")
     public ResponseEntity<List<ProjectSummaryProjection>> findAllProjectsByUserId(@PathVariable Long id){
         return ResponseEntity.ok(projectService.findAllProjectsByUserId(id));
+    }
+
+    @GetMapping("{id}/teams")
+    public ResponseEntity<List<TeamProjection>> findAllTeamsByUserId(@PathVariable Long id){
+        return ResponseEntity.ok(teamService.findAllTeamsByUserId(id));
+    }
+
+    @GetMapping("{id}/teams-summary")
+    public ResponseEntity<List<TeamSummaryProjection>> findAllTeamsSummaryByUserId(@PathVariable Long id){
+        return ResponseEntity.ok(teamService.findAllTeamsSummaryByUserId(id));
     }
 
 }
