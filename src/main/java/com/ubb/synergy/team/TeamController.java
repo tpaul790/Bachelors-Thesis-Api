@@ -4,11 +4,13 @@ import com.ubb.synergy.team.dto.CreateTeamDto;
 import com.ubb.synergy.team.dto.TeamDto;
 import com.ubb.synergy.team.exception.TeamAlreadyExistException;
 import com.ubb.synergy.team.exception.TeamNotFoundException;
+import com.ubb.synergy.team.projection.TeamSummaryProjection;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -39,5 +41,10 @@ public class TeamController {
                     .status(HttpStatus.NOT_FOUND)
                     .body(Map.of("error", e.getMessage()));
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<List<TeamSummaryProjection>> findAllTeamsSummary(){
+        return ResponseEntity.ok(teamService.findAllTeamsSummary());
     }
 }
