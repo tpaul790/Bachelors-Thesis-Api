@@ -29,4 +29,12 @@ public interface TeamRepository extends JpaRepository<TeamEntity,Long>, JpaSpeci
         WHERE u.id = :id
     """)
     List<TeamSummaryProjection> findAllTeamsSummaryByUserId(Long id);
+
+    @Query("""
+       SELECT t
+       FROM TeamEntity t
+       JOIN t.members m
+       JOIN m.user
+    """)
+    List<TeamSummaryProjection> findAllTeamsSummary();
 }

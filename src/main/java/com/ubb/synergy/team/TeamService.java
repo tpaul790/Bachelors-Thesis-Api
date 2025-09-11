@@ -42,4 +42,8 @@ public class TeamService {
     public List<TeamSummaryProjection> findAllTeamsSummaryByUserId(Long id) {
         return teamRepository.findAllTeamsSummaryByUserId(id);
     }
+
+    public List<TeamSummaryProjection> findAllTeamsSummary() {
+        return teamRepository.findAllTeamsSummary();
+    }
 }
