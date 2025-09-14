@@ -8,6 +8,9 @@ import com.ubb.synergy.project.projection.ProjectSummaryProjection;
 import com.ubb.synergy.team.TeamEntity;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -39,8 +42,9 @@ public class ProjectService {
         return mapper.entityToDto(projectEntities);
     }
 
-    public List<ProjectSummaryProjection> findAllProjectsByUserId(Long id) {
-        return projectRepository.findAllProjectsByUserId(id);
+    public Page<ProjectSummaryProjection> findAllProjectsByUserId(Long id, Integer pageNumber, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return projectRepository.findAllProjectsByUserId(id, pageable);
     }
 
     public void deleteProject(Long id) {
