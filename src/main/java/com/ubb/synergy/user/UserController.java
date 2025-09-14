@@ -13,6 +13,7 @@ import com.ubb.synergy.user.exception.InvalidUserException;
 import com.ubb.synergy.user.exception.UserAlreadyExistException;
 import com.ubb.synergy.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -95,8 +96,12 @@ public class UserController {
     }
 
     @GetMapping("/{id}/projects")
-    public ResponseEntity<List<ProjectSummaryProjection>> findAllProjectsByUserId(@PathVariable Long id){
-        return ResponseEntity.ok(projectService.findAllProjectsByUserId(id));
+    public ResponseEntity<Page<ProjectSummaryProjection>> findAllProjectsByUserId(
+            @PathVariable Long id,
+            @RequestParam Integer pageNumber,
+            @RequestParam Integer pageSize
+    ){
+        return ResponseEntity.ok(projectService.findAllProjectsByUserId(id, pageNumber, pageSize));
     }
 
     @GetMapping("{id}/teams")
@@ -105,8 +110,12 @@ public class UserController {
     }
 
     @GetMapping("{id}/teams-summary")
-    public ResponseEntity<List<TeamSummaryProjection>> findAllTeamsSummaryByUserId(@PathVariable Long id){
-        return ResponseEntity.ok(teamService.findAllTeamsSummaryByUserId(id));
+    public ResponseEntity<Page<TeamSummaryProjection>> findAllTeamsSummaryByUserId(
+            @PathVariable Long id,
+            @RequestParam Integer pageNumber,
+            @RequestParam Integer pageSize
+    ){
+        return ResponseEntity.ok(teamService.findAllTeamsSummaryByUserId(id, pageNumber, pageSize));
     }
 
 }

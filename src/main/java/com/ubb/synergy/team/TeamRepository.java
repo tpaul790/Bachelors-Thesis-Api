@@ -2,6 +2,8 @@ package com.ubb.synergy.team;
 
 import com.ubb.synergy.team.projection.TeamProjection;
 import com.ubb.synergy.team.projection.TeamSummaryProjection;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -21,20 +23,29 @@ public interface TeamRepository extends JpaRepository<TeamEntity,Long>, JpaSpeci
     """)
     List<TeamProjection> findAllTeamsByUserId(Long id);
 
-    @Query("""
-        SELECT t
+    @Query(
+            value = """
+        SELECT DISTINCT t
         FROM TeamEntity t
         JOIN t.members m
         JOIN m.user u
         WHERE u.id = :id
-    """)
-    List<TeamSummaryProjection> findAllTeamsSummaryByUserId(Long id);
+        ORDER BY t.createdAt DESC
+        """,
+            countQuery = """
+        SELECT COUNT(DISTINCT t)
+        FROM TeamEntity t
+        JOIN t.members m
+        JOIN m.user u
+        WHERE u.id = :id
+        """
+    )
+    Page<TeamSummaryProjection> findAllTeamsSummaryByUserId(Long id, Pageable pageable);
 
-    @Query("""
-       SELECT t
-       FROM TeamEntity t
-       JOIN t.members m
-       JOIN m.user
-    """)
-    List<TeamSummaryProjection> findAllTeamsSummary();
+
+    @Query(
+            value = "SELECT t FROM TeamEntity t ORDER BY t.createdAt DESC",
+            countQuery = "SELECT COUNT(t) FROM TeamEntity t"
+    )
+    Page<TeamSummaryProjection> findAllTeamsSummary(Pageable pageable);
 }

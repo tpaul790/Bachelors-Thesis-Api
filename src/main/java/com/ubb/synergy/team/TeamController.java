@@ -5,6 +5,7 @@ import com.ubb.synergy.team.dto.TeamDto;
 import com.ubb.synergy.team.exception.TeamAlreadyExistException;
 import com.ubb.synergy.team.exception.TeamNotFoundException;
 import com.ubb.synergy.team.projection.TeamSummaryProjection;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -44,7 +45,7 @@ public class TeamController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TeamSummaryProjection>> findAllTeamsSummary(){
-        return ResponseEntity.ok(teamService.findAllTeamsSummary());
+    public ResponseEntity<Page<TeamSummaryProjection>> findAllTeamsSummary(@RequestParam Integer pageNumber, @RequestParam Integer pageSize){
+        return ResponseEntity.ok(teamService.findAllTeamsSummary(pageNumber, pageSize));
     }
 }

@@ -7,6 +7,9 @@ import com.ubb.synergy.team.exception.TeamNotFoundException;
 import com.ubb.synergy.team.projection.TeamProjection;
 import com.ubb.synergy.team.projection.TeamSummaryProjection;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -39,11 +42,13 @@ public class TeamService {
         return teamRepository.findAllTeamsByUserId(id);
     }
 
-    public List<TeamSummaryProjection> findAllTeamsSummaryByUserId(Long id) {
-        return teamRepository.findAllTeamsSummaryByUserId(id);
+    public Page<TeamSummaryProjection> findAllTeamsSummaryByUserId(Long id, Integer pageNumber, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return teamRepository.findAllTeamsSummaryByUserId(id, pageable);
     }
 
-    public List<TeamSummaryProjection> findAllTeamsSummary() {
-        return teamRepository.findAllTeamsSummary();
+    public Page<TeamSummaryProjection> findAllTeamsSummary(int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return teamRepository.findAllTeamsSummary(pageable);
     }
 }
