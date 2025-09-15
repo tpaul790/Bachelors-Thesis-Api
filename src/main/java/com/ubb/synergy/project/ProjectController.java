@@ -5,6 +5,7 @@ import com.ubb.synergy.project.dto.ProjectDto;
 import com.ubb.synergy.project.exception.ProjectAlreadyExistException;
 import com.ubb.synergy.project.exception.ProjectNotFoundException;
 import com.ubb.synergy.project.projection.ProjectSummaryProjection;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +23,11 @@ public class ProjectController {
     public ProjectController(ProjectService projectService) {this.projectService = projectService;}
 
     @GetMapping
-    public ResponseEntity<List<ProjectDto>> findAllProjects(){
-        return ResponseEntity.ok(projectService.findAll());
+    public ResponseEntity<Page<ProjectSummaryProjection>> findAllProjects(
+            @RequestParam Integer pageNumber,
+            @RequestParam Integer pageSize
+    ) {
+        return ResponseEntity.ok(projectService.findAllProjectsSummary(pageNumber, pageSize));
     }
 
     @PostMapping

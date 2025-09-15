@@ -37,9 +37,9 @@ public class ProjectService {
         return mapper.entityToDto(projectRepository.save(project));
     }
 
-    public List<ProjectDto> findAll(){
-        List<ProjectEntity> projectEntities = projectRepository.findAll();
-        return mapper.entityToDto(projectEntities);
+    public Page<ProjectSummaryProjection> findAllProjectsSummary(Integer pageNumber, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return projectRepository.findAllProjectsSummary(pageable);
     }
 
     public Page<ProjectSummaryProjection> findAllProjectsByUserId(Long id, Integer pageNumber, Integer pageSize) {
