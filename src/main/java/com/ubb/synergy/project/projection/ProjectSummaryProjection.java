@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 public interface ProjectSummaryProjection {
     Long getId();
-//    MemberRole getRole();
     String getName();
     String getDescription();
     LocalDateTime getCreatedAt();

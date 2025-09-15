@@ -34,4 +34,17 @@ public interface ProjectRepository extends JpaRepository<ProjectEntity, Long>, J
         """
     )
     Page<ProjectSummaryProjection> findAllProjectsByUserId(Long id, Pageable pageable);
+
+    @Query(
+            value = """
+            SELECT DISTINCT (p)
+            FROM ProjectEntity p
+            ORDER BY p.createdAt DESC
+        """,
+            countQuery = """
+            SELECT COUNT(DISTINCT(p))
+            FROM ProjectEntity p
+        """
+    )
+    Page<ProjectSummaryProjection> findAllProjectsSummary(Pageable pageable);
 }
