@@ -87,6 +87,7 @@ public class UserController {
     @AllowAdmin
     public ResponseEntity<?> updateAdmin(@PathVariable Long id, @RequestBody AdminUpdateDto user){
         try {
+            System.out.println(user);
             return ResponseEntity.ok(userService.updateUser(id, user));
         }catch (UserNotFoundException | InvalidUserException e){
             return ResponseEntity

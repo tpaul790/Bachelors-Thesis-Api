@@ -20,7 +20,7 @@ public class UserUpdateDto implements UpdatableUserDto {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setEmail(email);
-        user.setIconNumber(iconNumber);
+        user.setIconNumber(user.getIconNumber());
         return usernameChanged;
     }
 }

@@ -31,7 +31,7 @@ public class UserService {
     }
 
     public List<UserDto> findAllUsers() {
-        return mapper.entityToDto(userRepository.findAll());
+        return mapper.entityToDto(userRepository.findAllByOrderById());
     }
 
     public UserDto saveUser(UserDto userDto) {
