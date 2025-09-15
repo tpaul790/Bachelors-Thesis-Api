@@ -30,7 +30,7 @@ public class UserValidator {
     private String validateUserRole(UserEntity user) {
         if(user.getUserRole() == null ||
                 (user.getUserRole() != UserRole.USER && user.getUserRole() != UserRole.ADMIN)){
-            return "Invalid user role";
+            return "Invalid user role! ";
         }
         return "";
     }
